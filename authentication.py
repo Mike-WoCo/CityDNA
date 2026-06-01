@@ -10,7 +10,7 @@ def prepare_log_in_info() -> tuple[str, str]:
     """
     client = secretmanager.SecretManagerServiceClient()
 
-    project_id = "citydna-dashboard"
+    project_id = "citydna-dashboard-x"
     secret_id = "TourMIS"
     parent = f"projects/{project_id}"
 
