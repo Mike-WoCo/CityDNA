@@ -10,7 +10,7 @@ def upload_coordinates_dictionary(df_geo: dict) -> None:
     '''
 
     client = bigquery.Client()
-    table_id = "citydna-dashboard.cityDNA_dataset.Coordinates_dictionary"
+    table_id = "citydna-dashboard-x.cityDNA_dataset.Coordinates_dictionary"
 
     schema = [
         bigquery.SchemaField("Destinations", "STRING"),
@@ -33,7 +33,7 @@ def upload_historical_bednights_table(dfm: pd.DataFrame) -> None:
     '''
 
     client = bigquery.Client()
-    table_id = "citydna-dashboard.cityDNA_dataset.Monthly_data_v4_yearly_estimates"
+    table_id = "citydna-dashboard-x.cityDNA_dataset.Monthly_data_v4_yearly_estimates"
 
     schema = [
         bigquery.SchemaField("Destinations", "STRING"),
@@ -64,7 +64,7 @@ def append_new_data_to_bednights_table(dfm: pd.DataFrame) -> None:
     '''
 
     client = bigquery.Client()
-    table_id = "citydna-dashboard.cityDNA_dataset.Monthly_data_temporary_table"
+    table_id = "citydna-dashboard-x.cityDNA_dataset.Monthly_data_temporary_table"
 
     schema = [
         bigquery.SchemaField("Destinations", "STRING"),
@@ -90,8 +90,8 @@ def append_new_data_to_bednights_table(dfm: pd.DataFrame) -> None:
     job.result()  # Wait for job to complete
 
     query = """
-    MERGE `citydna-dashboard.cityDNA_dataset.Monthly_data_v4_yearly_estimates` T
-    USING `citydna-dashboard.cityDNA_dataset.Monthly_data_temporary_table` S
+    MERGE `citydna-dashboard-x.cityDNA_dataset.Monthly_data_v4_yearly_estimates` T
+    USING `citydna-dashboard-x.cityDNA_dataset.Monthly_data_temporary_table` S
     ON T.Destinations = S.Destinations
     AND T.Definition = S.Definition
     AND T.Market = S.Market
@@ -104,7 +104,7 @@ def append_new_data_to_bednights_table(dfm: pd.DataFrame) -> None:
     """
 
     client.query(query).result()
-    client.delete_table("citydna-dashboard.cityDNA_dataset.Monthly_data_temporary_table")
+    client.delete_table("citydna-dashboard-x.cityDNA_dataset.Monthly_data_temporary_table")
 
 def upload_historical_population_table(df_pop: pd.DataFrame) -> None:
     '''
@@ -112,7 +112,7 @@ def upload_historical_population_table(df_pop: pd.DataFrame) -> None:
     '''
 
     client = bigquery.Client()
-    table_id = "citydna-dashboard.cityDNA_dataset.Population_statistics_v3"
+    table_id = "citydna-dashboard-x.cityDNA_dataset.Population_statistics_v3"
 
     schema = [
         bigquery.SchemaField("Destination", "STRING"),
@@ -136,7 +136,7 @@ def append_new_data_to_population_table(df_pop: pd.DataFrame) -> None:
     '''
 
     client = bigquery.Client()
-    table_id = "citydna-dashboard.cityDNA_dataset.Population_statistics_v3_temporary_table"
+    table_id = "citydna-dashboard-x.cityDNA_dataset.Population_statistics_v3_temporary_table"
 
     schema = [
         bigquery.SchemaField("Destination", "STRING"),
@@ -155,8 +155,8 @@ def append_new_data_to_population_table(df_pop: pd.DataFrame) -> None:
     job.result()  # Wait for job to complete
 
     query = """
-    MERGE `citydna-dashboard.cityDNA_dataset.Population_statistics_v3` T
-    USING `citydna-dashboard.cityDNA_dataset.Population_statistics_v3_temporary_table` S
+    MERGE `citydna-dashboard-x.cityDNA_dataset.Population_statistics_v3` T
+    USING `citydna-dashboard-x.cityDNA_dataset.Population_statistics_v3_temporary_table` S
     ON T.Destination = S.Destination
     AND T.Definition = S.Definition
     AND T.Year = S.Year
@@ -167,4 +167,4 @@ def append_new_data_to_population_table(df_pop: pd.DataFrame) -> None:
     """
 
     client.query(query).result()
-    client.delete_table("citydna-dashboard.cityDNA_dataset.Population_statistics_v3_temporary_table")
+    client.delete_table("citydna-dashboard-x.cityDNA_dataset.Population_statistics_v3_temporary_table")

@@ -68,7 +68,7 @@ def download_coordinates_dictionary() -> dict:
     #Get the unique definition for each destinations
     query = """
     SELECT *
-    FROM `citydna-dashboard.cityDNA_dataset.Coordinates_dictionary`
+    FROM `citydna-dashboard-x.cityDNA_dataset.Coordinates_dictionary`
     """
 
     query_job = client.query(query)
@@ -89,7 +89,7 @@ def get_population_definitions(city_dict: dict) -> dict:
     SELECT DISTINCT 
         Destinations,
         Definition
-    FROM `citydna-dashboard.cityDNA_dataset.Monthly_data_v4_yearly_estimates`
+    FROM `citydna-dashboard-x.cityDNA_dataset.Monthly_data_v4_yearly_estimates`
     WHERE Definition LIKE 'N%'
     ORDER BY Destinations
     """
