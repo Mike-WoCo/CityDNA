@@ -20,8 +20,9 @@ def collect_main_data(city_dict: dict, token: str, username: str, password: str)
 
     current_year = datetime.now().year
     last_year = datetime.now().year - 1
+    previous_year = datetime.now().year -2
     #historical_year_set = [i for i in range(2017, datetime.now().year + 1)]
-    year_set = [last_year, current_year] # USE THIS TO ONLY PULL DATA THAT HAS REALISTICALLY BEEN UPDATED SINCE THE LAST PULL
+    year_set = [previous_year, last_year, current_year] # USE THIS TO ONLY PULL DATA THAT HAS REALISTICALLY BEEN UPDATED SINCE THE LAST PULL
 
     collected_data_monthly = {
         'Destinations' : [],
